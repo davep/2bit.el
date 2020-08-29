@@ -416,15 +416,18 @@ duration of BODY."
   `(let ((,name (2bit-sequence (2bit-open ,file) ,sequence)))
      ,@body))
 
+(defun 2bit--location-prompt ()
+  "Helper function for `interactive' functions that prompt for a location."
+  (let* ((file (read-file-name "2bit file: "))
+         (sequence (completing-read "Sequence: " (2bit-sequence-names file)))
+         (start (read-number (format "%s; Start: " sequence) 0))
+         (end (read-number (format "%s; Start: %d; End: " sequence start) (2bit-sequence-dna-size (2bit-sequence file sequence)))))
+    (list file sequence start end)))
+
 ;;;###autoload
 (defun 2bit-insert-bases (file sequence start end)
   "Insert bases bounded be START end END, from SEQUENCE in FILE."
-  (interactive
-   (let* ((file (read-file-name "2bit file: "))
-          (sequence (completing-read "Sequence: " (2bit-sequence-names file)))
-          (start (read-number (format "%s; Start: " sequence) 0))
-          (end (read-number (format "%s; Start: %d; End: " sequence start) (2bit-sequence-dna-size (2bit-sequence file sequence)))))
-     (list file sequence start end)))
+  (interactive (2bit--location-prompt))
   (insert (2bit-bases (2bit-sequence file sequence) start end)))
 
 (provide '2bit)
