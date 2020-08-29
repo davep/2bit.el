@@ -430,6 +430,13 @@ duration of BODY."
   (interactive (2bit--location-prompt))
   (insert (2bit-bases (2bit-sequence file sequence) start end)))
 
+;;;###autoload
+(defun 2bit-insert-fasta (file sequence start end)
+  "Insert FASTA format for bases bounded by START and END, from SEQUENCE in FILE."
+  (interactive (2bit--location-prompt))
+  (insert (format "> %s; %s:%d-%d\n%s\n" (file-name-base file) sequence start end
+                  (replace-regexp-in-string ".\\{80\\}" "\\&\n"  (2bit-bases (2bit-sequence file sequence) start end)))))
+
 (provide '2bit)
 
 ;;; 2bit.el ends here
