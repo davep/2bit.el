@@ -427,16 +427,6 @@ duration of BODY."
      (list file sequence start end)))
   (insert (2bit-bases (2bit-sequence file sequence) start end)))
 
-;; (2bit-open "/Users/davep/Downloads/hg38.2bit" t)
-;; (2bit-sequence-count "/Users/davep/Downloads/hg38.2bit")
-;; (2bit-sequence-names "/Users/davep/Downloads/hg38.2bit")
-;; (2bit-sequence "/Users/davep/Downloads/hg38.2bit" "chr1")
-;; (2bit-sequence-dna-size (2bit-sequence "/Users/davep/Downloads/hg38.2bit" "chr1"))
-;; (2bit-sequence-n-blocks (2bit-sequence "/Users/davep/Downloads/hg38.2bit" "chr1"))
-;; (2bit-sequence-mask-blocks (2bit-sequence "/Users/davep/Downloads/hg38.2bit" "chr1"))
-;; (2bit-bases (2bit-sequence (2bit-open "/Users/davep/Downloads/hg38.2bit") "chr1") 100000 100100)
-;; (2bit-bases (2bit-sequence "/Users/davep/Downloads/hg38.2bit" "chr1") 100 200)
-
 (provide '2bit)
 
 ;;; 2bit.el ends here
