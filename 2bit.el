@@ -3,7 +3,7 @@
 
 ;; Author: Dave Pearson <davep@davep.org>
 ;; Version: 0.1
-;; Keywords: {{keywords}}
+;; Keywords: files, data
 ;; URL: https://github.com/davep/2bit.el
 ;; Package-Requires: ((emacs "24"))
 
