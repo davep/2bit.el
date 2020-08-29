@@ -416,6 +416,17 @@ duration of BODY."
   `(let ((,name (2bit-sequence (2bit-open ,file) ,sequence)))
      ,@body))
 
+;;;###autoload
+(defun 2bit-insert-bases (file sequence start end)
+  "Insert bases bounded be START end END, from SEQUENCE in FILE."
+  (interactive
+   (let* ((file (read-file-name "2bit file: "))
+          (sequence (completing-read "Sequence: " (2bit-sequence-names file)))
+          (start (read-number (format "%s; Start: " sequence) 0))
+          (end (read-number (format "%s; Start: %d; End: " sequence start) (2bit-sequence-dna-size (2bit-sequence file sequence)))))
+     (list file sequence start end)))
+  (insert (2bit-bases (2bit-sequence file sequence) start end)))
+
 ;; (2bit-open "/Users/davep/Downloads/hg38.2bit" t)
 ;; (2bit-sequence-count "/Users/davep/Downloads/hg38.2bit")
 ;; (2bit-sequence-names "/Users/davep/Downloads/hg38.2bit")
