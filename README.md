@@ -126,4 +126,11 @@ The following interactive commands are available:
 `point` in the current buffer, formatted in [FASTA
 format](https://en.wikipedia.org/wiki/FASTA_format).
 
+## Example
+
+Here's a simple recording of a sample of using `2bit-insert-fasta` to create
+a FASTA file from a 2bit file:
+
+[![](https://img.youtube.com/vi/OimlNumAKWo/0.jpg)](https://www.youtube.com/watch?v=OimlNumAKWo)
+
 [//]: # (README.md ends here)
