@@ -426,7 +426,7 @@ duration of BODY."
 
 ;;;###autoload
 (defun 2bit-insert-bases (file sequence start end)
-  "Insert bases bounded be START end END, from SEQUENCE in FILE."
+  "Insert bases bounded by START and END, from SEQUENCE in FILE."
   (interactive (2bit--location-prompt))
   (insert (2bit-bases (2bit-sequence file sequence) start end)))
 
