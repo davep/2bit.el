@@ -443,8 +443,8 @@ duration of BODY."
 If the command is invoked with \\[universal-argument] mask blocks
 will be taken into account.
 
-When used as an interactive command, if SEQUENCE is of either of
-the forms:
+When used as an interactive command, if SEQUENCE is either of the
+forms:
 
   seq:start..end
   seq:start-end
@@ -462,8 +462,8 @@ format."
 If the command is invoked with \\[universal-argument] mask blocks
 will be taken into account.
 
-When used as an interactive command, if SEQUENCE is of either of
-the forms:
+When used as an interactive command, if SEQUENCE is either of the
+forms:
 
   seq:start..end
   seq:start-end
