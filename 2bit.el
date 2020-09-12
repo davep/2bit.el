@@ -430,16 +430,24 @@ duration of BODY."
 
 ;;;###autoload
 (defun 2bit-insert-bases (file sequence start end)
-  "Insert bases bounded by START and END, from SEQUENCE in FILE."
+  "Insert bases bounded START and END, from SEQUENCE in FILE.
+
+If the command is invoked with \\[universal-argument] mask blocks
+will be taken into account."
   (interactive (2bit--location-prompt))
-  (insert (2bit-bases (2bit-sequence file sequence) start end)))
+  (2bit-with-file (data file current-prefix-arg)
+    (insert (2bit-bases (2bit-sequence data sequence) start end))))
 
 ;;;###autoload
 (defun 2bit-insert-fasta (file sequence start end)
-  "Insert FASTA format for bases bounded by START and END, from SEQUENCE in FILE."
+  "Insert FASTA format for bases bounded START and END, from SEQUENCE in FILE.
+
+If the command is invoked with \\[universal-argument] mask blocks
+will be taken into account."
   (interactive (2bit--location-prompt))
-  (insert (format "> %s; %s:%d-%d\n%s\n" (file-name-base file) sequence start end
-                  (replace-regexp-in-string ".\\{80\\}" "\\&\n"  (2bit-bases (2bit-sequence file sequence) start end)))))
+  (2bit-with-file (data file current-prefix-arg)
+    (insert (format "> %s; %s:%d-%d\n%s\n" (file-name-base file) sequence start end
+                    (replace-regexp-in-string ".\\{80\\}" "\\&\n"  (2bit-bases (2bit-sequence data sequence) start end))))))
 
 (provide '2bit)
 
