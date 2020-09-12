@@ -423,17 +423,33 @@ duration of BODY."
 (defun 2bit--location-prompt ()
   "Helper function for `interactive' functions that prompt for a location."
   (let* ((file (read-file-name "2bit file: "))
-         (sequence (completing-read "Sequence: " (2bit-sequence-names file)))
-         (start (read-number (format "%s; Start: " sequence) 0))
-         (end (read-number (format "%s; Start: %d; End: " sequence start) (2bit-sequence-dna-size (2bit-sequence file sequence)))))
-    (list file sequence start end)))
+         (sequence (completing-read "Sequence: " (2bit-sequence-names file))))
+    ;; Here, while we've really simply been asking for the name of a
+    ;; sequence, we're going to allow the user to enter a full location in
+    ;; the common form of seq:start..end. If it looks like they've done that
+    ;; we'll fill out the remaining information from that.
+    (save-match-data
+      (if (string-match (rx bol (group (+ any)) ":" (group (+ numeric)) (or "-" "..") (group (+ numeric)) eol) sequence)
+          (list file (match-string 1 sequence) (string-to-number (match-string 2 sequence)) (string-to-number (match-string 3 sequence)))
+        (let ((start (read-number (format "%s; Start: " sequence) 0)))
+          (list file sequence start
+                (read-number (format "%s; Start: %d; End: " sequence start) (2bit-sequence-dna-size (2bit-sequence file sequence)))))))))
 
 ;;;###autoload
 (defun 2bit-insert-bases (file sequence start end)
   "Insert bases bounded START and END, from SEQUENCE in FILE.
 
 If the command is invoked with \\[universal-argument] mask blocks
-will be taken into account."
+will be taken into account.
+
+When used as an interactive command, if SEQUENCE is of either of
+the forms:
+
+  seq:start..end
+  seq:start-end
+
+SEQUENCE, START and END will be fully-auto-populated from that
+format."
   (interactive (2bit--location-prompt))
   (2bit-with-file (data file current-prefix-arg)
     (insert (2bit-bases (2bit-sequence data sequence) start end))))
@@ -443,7 +459,16 @@ will be taken into account."
   "Insert FASTA format for bases bounded START and END, from SEQUENCE in FILE.
 
 If the command is invoked with \\[universal-argument] mask blocks
-will be taken into account."
+will be taken into account.
+
+When used as an interactive command, if SEQUENCE is of either of
+the forms:
+
+  seq:start..end
+  seq:start-end
+
+SEQUENCE, START and END will be fully-auto-populated from that
+format."
   (interactive (2bit--location-prompt))
   (2bit-with-file (data file current-prefix-arg)
     (insert (format "> %s; %s:%d-%d\n%s\n" (file-name-base file) sequence start end
