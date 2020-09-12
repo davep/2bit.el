@@ -28,6 +28,7 @@
 
 ;;; Code:
 
+(require 'rx)
 (require 'cl-lib)
 
 (defconst 2bit-signature #x1a412743
