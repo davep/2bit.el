@@ -401,10 +401,13 @@ location."
      finally return (buffer-string))))
 
 ;;;###autoload
-(cl-defmacro 2bit-with-file ((handle file) &body body)
-  "Perform BODY against 2bit file name FILE, using HANDLE as he reader name."
+(cl-defmacro 2bit-with-file ((handle file &optional masking) &body body)
+  "Perform BODY against 2bit file name FILE, using HANDLE as he reader name.
+
+MASKING optionally controls if masking should be handled. The
+default is nil."
   (declare (indent 1))
-  `(let ((,handle (2bit-open ,file)))
+  `(let ((,handle (2bit-open ,file ,masking)))
      ,@body))
 
 ;;;###autoload
