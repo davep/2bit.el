@@ -2,7 +2,7 @@
 ;; Copyright 2020 by Dave Pearson <davep@davep.org>
 
 ;; Author: Dave Pearson <davep@davep.org>
-;; Version: 0.1
+;; Version: 1.0
 ;; Keywords: files, data
 ;; URL: https://github.com/davep/2bit.el
 ;; Package-Requires: ((emacs "24.3"))
