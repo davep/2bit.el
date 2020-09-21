@@ -131,7 +131,7 @@ will be increased by LENGTH bytes."
 (defsubst 2bit--word-from-bytes (source bytes)
   "Convert a binary word in BYTES into an int.
 
-While SOURCE isn't used to read anything, it is used to know of
+While SOURCE isn't used to read anything, it is used to know if
 any endian issues should be taken into account."
   (let ((word (logior
                (aref bytes 0)
