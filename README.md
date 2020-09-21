@@ -1,5 +1,8 @@
 # 2bit.el
 
+[![MELPA Stable](https://stable.melpa.org/packages/2bit-badge.svg)](https://stable.melpa.org/#/2bit)
+[![MELPA](https://melpa.org/packages/2bit-badge.svg)](https://melpa.org/#/2bit)
+
 ## Introduction
 
 `2bit.el` is a package for Emacs that provides a collection of functions,
