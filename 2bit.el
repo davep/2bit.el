@@ -384,7 +384,7 @@ location."
                  ;; ...it's an "N".
                  "N"
                ;; ...otherwise decode the base.
-               (let ((base (aref 2bit-bases (ash (logand (ash #b11 shift) byte) (- shift)))))
+               (let ((base (aref 2bit-bases (logand (ash byte (- shift)) #b11))))
                  ;; If the position lies within a mask block (note that we
                  ;; don't bother checking if the masking flag is set or not,
                  ;; if it was nil there will be no mask blocks loaded so
